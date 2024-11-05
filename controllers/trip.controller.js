@@ -11,21 +11,32 @@ const tripController = {
         }
     },
 
-// Tạo mới một địa điểm
-createtrip: async (req, res) => {
-    try {
-        const { trip, location } = req.body; // Lấy thông tin trip và location
-        const newTrip = new Trip({
-            ...location,
-            trip: trip // Đảm bảo rằng trip được nhúng đúng vào trong Trip
-        });
-        const savedTrip = await newTrip.save();
-        res.status(201).json(savedTrip);
-    } catch (err) {
-        res.status(500).json({ message: 'Error creating trip', error: err.message });
-    }
-},
-
+    // Tạo mới một địa điểm
+    createtrip: async (req, res) => {
+        try {
+            // Lấy dữ liệu từ req.body
+            const { tripName, date, time, guide, actions, location } = req.body;
+    
+            // Tạo một trip mới với cấu trúc đúng
+            const newTrip = new trip({
+                name: location.name,        // Đảm bảo cung cấp trường 'name'
+                imageURL: location.imageURL, // Đảm bảo cung cấp trường 'imageURL'
+                trip: {
+                    tripName,               // Chuyển tiếp các thuộc tính của chuyến đi
+                    date,
+                    time,
+                    guide,
+                    actions
+                }
+            });
+    
+            const savedTrip = await newTrip.save();
+            res.status(201).json(savedTrip);
+        } catch (err) {
+            res.status(500).json({ message: 'Error creating trip', error: err.message });
+        }
+    },
+    
 
     // Xóa tất cả các địa điểm
     deleteAlltrips: async (req, res) => {
