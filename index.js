@@ -15,11 +15,11 @@ mongoose.connect('mongodb+srv://tunglatoi2004:tunglatoi2004@cluster0.4mxgk.mongo
     console.error('Error connecting to MongoDB:', err);
 });
 
-app.use(cors());
 app.use(cors({
-    origin: '*', // Hoặc giới hạn nguồn cụ thể như 'https://example.com'
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Cấu hình các phương thức cho phép
-  }));
+    origin: '*', // Cho phép tất cả các nguồn
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Các phương thức HTTP được phép
+    allowedHeaders: '*' // Cho phép tất cả các header
+}));
 app.use(express.json()); // Thêm middleware để parse JSON requests
 
 // Định nghĩa route cho các API
