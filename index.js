@@ -15,7 +15,7 @@ mongoose.connect('mongodb+srv://tunglatoi2004:tunglatoi2004@cluster0.4mxgk.mongo
     console.error('Error connecting to MongoDB:', err);
 });
 
-// Middleware
+const cors = require('cors');
 app.use(cors());
 app.use(express.json()); // Thêm middleware để parse JSON requests
 
