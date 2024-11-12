@@ -14,7 +14,7 @@ const tripController = {
     // Tạo mới một địa điểm
     createtrip: async (req, res) => {
         try {
-            const newTrip = new trip(req.body); // Đổi tên biến thành newTrip
+            const newTrip = new trip(req.body);
             const savedTrip = await newTrip.save();
             res.status(201).json(savedTrip);
         } catch (err) {
