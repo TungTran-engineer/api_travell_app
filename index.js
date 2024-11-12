@@ -16,6 +16,10 @@ mongoose.connect('mongodb+srv://tunglatoi2004:tunglatoi2004@cluster0.4mxgk.mongo
 });
 
 app.use(cors());
+app.use(cors({
+    origin: '*', // Hoặc giới hạn nguồn cụ thể như 'https://example.com'
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Cấu hình các phương thức cho phép
+  }));
 app.use(express.json()); // Thêm middleware để parse JSON requests
 
 // Định nghĩa route cho các API
