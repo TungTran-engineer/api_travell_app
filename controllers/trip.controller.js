@@ -22,6 +22,21 @@ const tripController = {
         }
     },
 
+    // Chỉnh sửa thông tin chuyến đi
+    editTrip: async (req, res) => {
+        try {
+            // Lấy thông tin chuyến đi từ DB dựa trên ID
+            const trip = await Trip.findById(req.params.id);
+            if (!trip) {
+                return res.status(404).json({ message: 'Trip not found' });
+            }
+            // Trả về thông tin chuyến đi để người dùng có thể chỉnh sửa
+            res.status(200).json(trip);
+        } catch (err) {
+            res.status(500).json({ message: 'Error fetching trip data', error: err.message });
+        }
+    },
+
     // Cập nhật thông tin chuyến đi
     updateTrip: async (req, res) => {
         try {
@@ -35,20 +50,7 @@ const tripController = {
         }
     },
 
-    // Chỉnh sửa thông tin chuyến đi
-    editTrip: async (req, res) => {
-        try {
-            const trip = await Trip.findById(req.params.id);
-            if (!trip) {
-                return res.status(404).json({ message: 'Trip not found' });
-            }
-            res.status(200).json(trip);
-        } catch (err) {
-            res.status(500).json({ message: 'Error fetching trip data', error: err.message });
-        }
-    },
-
-    // Xóa tất cả các chuyến đi
+    // Xóa chuyến đi theo ID
     deleteTripById: async (req, res) => {
         try {
             const { id } = req.params;
@@ -61,7 +63,6 @@ const tripController = {
             res.status(500).json({ message: 'Error deleting trip', error: err.message });
         }
     }
-    
 };
 
 module.exports = tripController;

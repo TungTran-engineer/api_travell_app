@@ -18,19 +18,21 @@ mongoose.connect('mongodb+srv://tunglatoi2004:tunglatoi2004@cluster0.4mxgk.mongo
 
 app.use(cors({
     origin: '*', // Cho phép tất cả các nguồn
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Các phương thức HTTP được phép
-    allowedHeaders: '*' // Cho phép tất cả các header
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: '*' 
 }));
-app.use(express.json()); // Thêm middleware để parse JSON requests
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 
 const tripRoute = require('./routes/trip.route');
-const addressRoute = require('./routes/address.route');
 const userRoute = require('./routes/users.route');
 
+
 app.use('/user', userRoute);
-app.use('/address', addressRoute);
 app.use('/trip', tripRoute);
 
 // Route chính

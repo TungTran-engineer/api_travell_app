@@ -14,7 +14,7 @@ router.get('/edit/:id', tripController.editTrip);
 // Route để cập nhật chuyến đi
 router.put('/update/:id', tripController.updateTrip);
 
-// Route để xóa tất cả chuyến đi
+// Route để xóa chuyến đi theo ID
 router.delete('/delete/:id', tripController.deleteTripById);
 
 module.exports = router;
