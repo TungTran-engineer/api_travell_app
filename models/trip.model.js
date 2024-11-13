@@ -24,6 +24,9 @@ const tripSchema = new Schema({
     },
     description: {
         type: String,
+    },
+    guide: {
+        type: String,
     }
 }, { timestamps: true });
 
