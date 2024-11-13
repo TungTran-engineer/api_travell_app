@@ -1,4 +1,10 @@
 {
+    "name": "your-project-name",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "nodemon index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",

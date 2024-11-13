@@ -64,7 +64,8 @@ router.get('/dss', userController.getuser);
 // Tạo mới một người dùng
 router.post('/create', userController.createuser);
 
-// Xóa tất cả người dùng
-router.delete('/deleteAll', userController.deleteAllusers);
+
+router.delete('/delete/:id', userController.deleteUserById);
+
 
 module.exports = router;
