@@ -35,6 +35,22 @@ const userController = {
         }
     },
 
+    updateUserById: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const updates = req.body;
+
+            // Tìm và cập nhật người dùng theo ID
+            const updatedUser = await User.findByIdAndUpdate(id, updates, { new: true });
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.status(200).json({ message: 'User updated successfully', updatedUser });
+        } catch (err) {
+            res.status(500).json({ message: 'Error updating user', error: err.message });
+        }
+    },
+
     // Xóa tất cả người dùng
     deleteUserById: async (req, res) => {
         try {

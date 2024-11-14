@@ -64,6 +64,9 @@ router.get('/dss', userController.getuser);
 
 router.get('/dss/:id', userController.getUserById);
 
+
+router.put('/update/:id', userController.updateUserById);
+
 // Tạo mới một người dùng
 router.post('/create', userController.createuser);
 
