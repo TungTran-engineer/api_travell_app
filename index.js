@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-
 const app = express();
 
 // Kết nối MongoDB
@@ -22,18 +21,30 @@ app.use(cors({
     allowedHeaders: '*' 
 }));
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
+// Import mô hình Trip
+const Trip = require('./models/trip.model');
 
-
+// Các route khác
 const tripRoute = require('./routes/trip.route');
 const userRoute = require('./routes/users.route');
 
-
 app.use('/user', userRoute);
 app.use('/trip', tripRoute);
+
+app.get('/trip/:id', async (req, res) => {
+    try {
+        const trip = await Trip.findById(req.params.id); 
+        if (!trip) {
+            return res.status(404).send('Trip not found');
+        }
+        res.json(trip);  // Trả về chuyến đi dưới dạng JSON
+    } catch (error) {
+        console.error('Error fetching trip:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 // Route chính
 app.get('/', (req, res) => res.send('tung đang học Node.js'));
