@@ -22,6 +22,19 @@ const userController = {
         }
     },
 
+    getUserById: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const user = await User.findById(id); // Tìm người dùng theo ID
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.status(200).json(user); // Trả về thông tin người dùng
+        } catch (err) {
+            res.status(500).json({ message: 'Error fetching user', error: err.message });
+        }
+    },
+
     // Xóa tất cả người dùng
     deleteUserById: async (req, res) => {
         try {
