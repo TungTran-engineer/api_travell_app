@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://tunglatoi2004:tunglatoi2004@cluster0.4mxgk.mongo
 });
 
 app.use(cors({
-    origin: '*', // Cho phép tất cả các nguồn
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: '*' 
 }));
@@ -25,11 +25,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // Import mô hình Trip
 const Trip = require('./models/trip.model');
+app.use(express.urlencoded({ extended: true }));
+
 
 // Các route khác
+const adminRoute = require('./routes/admin.route');
 const tripRoute = require('./routes/trip.route');
 const userRoute = require('./routes/users.route');
 
+app.use('/admin', adminRoute)
 app.use('/user', userRoute);
 app.use('/trip', tripRoute);
 
