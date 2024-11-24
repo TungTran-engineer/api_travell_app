@@ -21,6 +21,17 @@ app.use(cors({
     allowedHeaders: '*',
 }));
 
+app.get('/image-proxy', async (req, res) => {
+    const imageUrl = req.query.url; // Nhận URL ảnh từ query
+    try {
+        const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+        res.setHeader('Content-Type', response.headers['content-type']);
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).send('Error fetching image');
+    }
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

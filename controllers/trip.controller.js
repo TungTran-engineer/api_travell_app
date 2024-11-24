@@ -1,11 +1,16 @@
 const Trip = require('../models/trip.model');
 
 const tripController = {
-    // Lấy danh sách tất cả các chuyến đi
     getTrips: async (req, res) => {
         try {
-            const trips = await Trip.find(); // Lấy danh sách chuyến đi từ DB
-            res.status(200).json(trips); // Trả về danh sách chuyến đi
+            const trips = await Trip.find();
+            // Chuyển đổi imageUrl thành URL proxy
+            trips.forEach(trip => {
+                if (trip.imageUrl) {
+                    trip.imageUrl = `http://localhost:3000/image-proxy?url=${encodeURIComponent(trip.imageUrl)}`;
+                }
+            });
+            res.status(200).json(trips);
         } catch (err) {
             res.status(500).json({ message: 'Error fetching trips', error: err.message });
         }
