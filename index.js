@@ -16,11 +16,7 @@ mongoose.connect('mongodb+srv://tunglatoi2004:tunglatoi2004@cluster0.4mxgk.mongo
     console.error('Error connecting to MongoDB:', err);
 });
 
-app.use(cors({
-    origin: '*',
-    methods: '*',
-    allowedHeaders: '*',
-}));
+app.use(cors());
 
 app.get('/image-proxy', async (req, res) => {
     const imageUrl = req.query.url; // Nhận URL ảnh từ query
